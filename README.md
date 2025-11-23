@@ -83,6 +83,7 @@ factorial 10
 
 5. Запуск тестов:
 ```
+cd tests
 pytest test_sortings.py -v
 pytest test_structures.py -v
 pytest test_sortings_by_generators.py -v
