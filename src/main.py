@@ -1,17 +1,22 @@
 from src.structures import Queue, Stack
 from src.functions import Functions
 from src.sorting import Sortings
+from tests.testcase_generation_interactive import TestCaseGeneratorInteractive
+from src.constants import HELP
 
 names = {}
 f = Functions()
 s = Sortings()
+t = TestCaseGeneratorInteractive()
 
 def parse_line(line: str):
     ''' Функция, обеспечивающая функционал парсера для интеративного ввода '''
     line_split = line.split()
-    if line_split[0].lower() in ['queue','stack']:
+    if line_split[0] == 'help':
+        print(HELP)
+    elif line_split[0].lower() in ['queue','stack']:
         if len(line_split) == 2:
-            if line_split[0] == 'queue':
+            if line_split[0] == 'queue': 
                 names[line_split[1]] = Queue()
             else:
                 names[line_split[1]] = Stack()
@@ -31,8 +36,23 @@ def parse_line(line: str):
                 print(f'Fibo from {n}: {f.fibo(n)}')
             case 'fibo_recursive':
                 print(f'Fibo from {n}: {f.fibo_recursive(n)}')
-    elif line_split[0].lower() in ['bubble_sort', 'quick_sort', 'counting_sort', 'radix_sort', 'bucket_sort', 'heap_sort']: # name list
-        args = [float(elem) for elem in line_split[1].replace('[', '').replace(']','').split(',')]
+    elif line_split[0].lower() in ['bubble_sort', 'quick_sort', 'counting_sort', 'radix_sort', 'bucket_sort', 'heap_sort']:
+        for_generator = line_split[1].replace('(', ' ').replace(')', ' ').replace(',', ' ').split()
+        if for_generator[0] in ['rand_int_array', 'nearly_sorted', 'many_duplicates', 'reverse_sorted', 'rand_float_array']:
+            args_for_generator = [elem for elem in for_generator[1:]]
+            match for_generator[0]:
+                case 'rand_int_array':
+                    args = t.rand_int_array(*args_for_generator)
+                case 'nearly_sorted':
+                    args = t.nearly_sorted(*args_for_generator)
+                case 'many_duplicates':
+                    args = t.many_duplicates(*args_for_generator)
+                case 'reverse_sorted':
+                    args = t.reverse_sorted(*args_for_generator)
+                case 'rand_float_array':
+                    args = t.rand_float_array(*args_for_generator)
+        else:
+            args = [float(elem) for elem in line_split[1].replace('[', '').replace(']','').split(',')]
         match line_split[0].lower():
             case 'bubble_sort':
                 print(s.bubble_sort(args))

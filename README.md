@@ -8,7 +8,7 @@
     │   ├── tests/                             # Unit-тесты
     │   ├── uv.lock                            # Зависимости проекта
     │   ├── .gitignore                         # Gitignore файл
-    │   ├──.pre-commit-config.yaml             # Средства автоматизации проверки кодстайла
+    │   ├── .pre-commit-config.yaml            # Средства автоматизации проверки кодстайла
     │   ├── README.md                          # Описание проекта
 </pre>
 
@@ -19,10 +19,11 @@
 > В файле [functions.py](./src/functions.py) реализованы функции для рассчета чисел Фиббоначи и факториала.
 > В файле [sorting.py](./src/sorting.py) реализован класс **Sortings**, которые содержит различные методы сорнировки списков.
 > В файле [structures.py](./src/structures.py) реализованы классы **Stack** и **Queue**, которые представляют собой реализацию стека и очереди на основе list.
+
 > В папке [tests](./tests) лежат unit-тесты на различные модули.
 > В файле [test_functions.py](./src/test_functions.py) лежат тесты на модуль [functions.py](./src/functions.py)
 > В файле [test_structures.py](./src/test_structures.py) лежат тесты на модуль [structures.py](./src/structures.py)
-> В файлах [test_sortings.py](./src/test_sortings.py) и [test_sortings_by_generators.py](./src/test_sortings_by_generators.py) лежат тесты на модуль [sorting.py](./src/sorting.py). При этом сами генераторы тестов реализованы в файле [testcase_generation.py](./src/testcase_generation.py)
+> В файлах [test_sortings.py](./src/test_sortings.py) и [test_sortings_by_generators.py](./src/test_sortings_by_generators.py) лежат тесты на модуль [sorting.py](./src/sorting.py). При этом сами генераторы тестов реализованы в файле [testcase_generation.py](./src/testcase_generation.py). В файле [testcase_generation_interactive.py](./src/testcase_generation_interactive.py) реализолованы адаптации генераторов для интерактивного ввода.
 > В файле [benchmark_tests.py](./src/benchmark_tests.py) содержится алгоритм сравнения эффективности реализованных сортировок через бенчмарки.
 
 ## Инструкции по запуску модулей и тестов
@@ -66,9 +67,14 @@ algo_name list_value
 ```
 bubble_sort [1,5,2,3]
 ```
+Вместо list_value можно вводить название генератора из [testcase_generation_interactive.py](./src/testcase_generation_interactive.py) с валидными аргументами, результат работы генератора будет выступать в роли объекта для сортировки.
+Например,
+```
+bubble_sort reverse_sorted(10)
+```
 Ограничения:
 - Интерактивный ввод подразумевает непустой массив
-- Типы введеных данных должны соответствовать алгоритму сортировки
+- Типы введеных данных должны соответствовать алгоритму сортировки и генератору
 
 4. Запуск функций из файла [functions.py](./src/functions.py):
 ```
